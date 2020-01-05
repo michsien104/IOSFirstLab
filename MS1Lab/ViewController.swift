@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let url = URL(string: "https://api.icndb.com/jokes/random")!;
+
+        Alamofire.request(url).responseJSON {
+            response in
+            let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers);
+            let jsonData = json as! NSDictionary;
+            let value = jsonData["value"] as? [String: Any];
+            let joke = value!["joke"] as? String;
+            DispatchQueue.main.async {
+                self.textView.text = joke! as String;
+            };
+        }
     }
 
 
