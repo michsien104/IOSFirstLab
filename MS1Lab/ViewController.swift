@@ -8,14 +8,17 @@
 
 import UIKit
 import Alamofire
+import Toast_Swift
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.makeToast("Remember to rate the funny joke", duration: 10.0, position: .bottom)
+        
         let url = URL(string: "https://api.icndb.com/jokes/random")!;
-
+        
         Alamofire.request(url).responseJSON {
             response in
             let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers);

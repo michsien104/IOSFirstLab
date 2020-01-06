@@ -7,5 +7,6 @@ target 'MS1Lab' do
 
   # Pods for MS1Lab	
   pod 'Alamofire', '~> 4.7.0'
-  pod 'PullToBounce'
+  pod 'Toast-Swift'
+  pod 'Cosmos'
 end
